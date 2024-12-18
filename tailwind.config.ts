@@ -9,8 +9,22 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        bg: "#10151A",
+        yellow: "#FFC803",
+      },
+      fontFamily: {
+        "loos-bold": ["var(--font-loosWideBold)"],
+      },
+      screens: {
+        xs: "328px",
+        sm: "400px",
+        md: "736px",
+        lg: "768px",
+        xl: "1140px",
+        "2xl": "1200px",
+      },
+      container: {
+        center: true,
       },
     },
   },
