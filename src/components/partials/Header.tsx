@@ -11,7 +11,7 @@ const Header: FunctionComponent<HeaderProps> = () => {
     <header>
       <div className="container flex items-center justify-between py-4">
         <Logo />
-        <div className="bg-yellow-200 fixed left-0 top-0 size-full overflow-auto">
+        <div className="bg-dark-blue-900 fixed left-0 top-0 -z-10 size-full overflow-auto">
           <button>Login</button>
           <ul>
             <li>Produce</li>

@@ -41,7 +41,7 @@ export default function RootLayout({
         className={cn(
           montserrat.className,
           loosWideBold.variable,
-          "bg-bg font-medium text-white"
+          "bg-dark-blue-950 font-medium text-white"
         )}
       >
         <Header />
