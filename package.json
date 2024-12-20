@@ -12,6 +12,7 @@
     "format": "yarn prettier . --write"
   },
   "dependencies": {
+    "class-variance-authority": "^0.7.1",
     "classnames": "^2.5.1",
     "next": "15.1.1",
     "react": "^19.0.0",
