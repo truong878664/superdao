@@ -3,7 +3,8 @@ import { Montserrat } from "next/font/google";
 import localFont from "next/font/local";
 
 import "./globals.css";
-import Header from "../components/partials/Header";
+
+import Header from "../components/layout/Header";
 
 import { cn } from "@/lib/utils";
 

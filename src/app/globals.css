@@ -7,3 +7,10 @@
 
 body {
 }
+
+.full-screen {
+  @apply fixed bottom-0 left-0 right-0 top-0;
+}
+.bg-var-color {
+  @apply bg-[rgb(from_var(--color)_r_g_b_/var(--tw-bg-opacity,1))];
+}

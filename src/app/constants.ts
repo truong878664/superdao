@@ -5,6 +5,11 @@ import PricingIcon from "@/assets/icons/nav/pricing.svg";
 import RoadMapIcon from "@/assets/icons/nav/road-map.svg";
 import WhatsNewIcon from "@/assets/icons/nav/whats-new.svg";
 
+import DiscordIcon from "@/assets/icons/social-network/discord.svg";
+import TelegramIcon from "@/assets/icons/social-network/telegram.svg";
+import TwitterIcon from "@/assets/icons/social-network/twitter.svg";
+import YoutubeIcon from "@/assets/icons/social-network/youtube.svg";
+
 const navList = [
   {
     title: "Produce",
@@ -59,12 +64,27 @@ const navList = [
   },
 ];
 
-const socialList = [
+const socialNetworkList = [
   {
     url: "#",
-    Icon: DemoIcon,
-    color: "#",
+    Icon: DiscordIcon,
+    color: "#77E6FF",
+  },
+  {
+    url: "#",
+    Icon: TelegramIcon,
+    color: "#7795FF",
+  },
+  {
+    url: "#",
+    Icon: YoutubeIcon,
+    color: "#F78787",
+  },
+  {
+    url: "#",
+    Icon: TwitterIcon,
+    color: "#9277FF",
   },
 ];
 
-export { navList };
+export { navList, socialNetworkList };

@@ -1,7 +1,12 @@
+import GetStated from "@/components/sections/GetStarted";
 import { FunctionComponent } from "react";
 
 const Home: FunctionComponent = () => {
-  return <div></div>;
+  return (
+    <>
+      <GetStated />
+    </>
+  );
 };
 
 export default Home;
