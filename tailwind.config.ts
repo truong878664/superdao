@@ -79,8 +79,10 @@ export default {
       },
       spacing: {
         "1.25": "0.3125rem",
+        "2.75": "0.6875rem",
         "4.25": "1.0625rem",
         "7.5": "1.875rem",
+        "8.5": "2.125rem",
       },
       container: {
         center: true,

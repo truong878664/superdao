@@ -8,23 +8,21 @@ import ArrowDown from "@/assets/icons/arrow-down.svg";
 import Link from "next/link";
 import { navList } from "@/app/constants";
 import SocialNetworkList from "../partials/SocialNetworkList";
-import TriggerPopup from "../shared/TriggerPopup";
+import InputTriggerPopup from "../shared/InputTriggerPopup";
 import { cn } from "@/lib/utils";
 
 interface HeaderProps {}
 
 const Header: FunctionComponent<HeaderProps> = () => {
-  const [isDropdownNav, setDropdownNav] = useState(false);
-
   return (
     <header>
-      <div className="container relative z-10 flex items-center justify-between py-10 sm:px-4 md:gap-14 md:px-0">
+      <div className="m:px-4 xl:py-8.5 container relative z-10 flex items-center justify-between py-4 md:gap-14 md:px-0 md:py-7.5 xl:gap-28">
         <Logo />
-        <TriggerPopup id="nav-popup" />
+        <InputTriggerPopup id="nav-popup" />
         <div className="full-screen -z-10 hidden overflow-auto bg-blue-dark-850 pb-5 pt-14 peer-checked:block md:relative md:block md:flex-1 md:overflow-visible md:bg-transparent md:p-0">
           <div className="container flex min-h-full flex-col justify-between gap-9">
             <div className="flex flex-col gap-8 pt-7.5 text-2sm font-semibold md:flex-row-reverse md:items-center md:justify-between md:pt-0">
-              <button className="md:bg-blue-dark-550 rounded-2lg bg-yellow-600/20 px-5 py-2.5 text-start leading-8 text-yellow-600 md:rounded-lg md:px-4 md:py-2 md:text-center md:text-xs md:leading-4 md:text-white">
+              <button className="xl:py-2.75 rounded-2lg bg-yellow-600/20 px-5 py-2.5 text-start leading-8 text-yellow-600 md:rounded-lg md:bg-blue-dark-550 md:px-4 md:py-2 md:text-center md:text-xs md:leading-4 md:text-white xl:px-5 xl:text-lg">
                 Login
               </button>
               <NavHeader.Ul>
@@ -61,7 +59,7 @@ export default Header;
  */
 const Ul: FunctionComponent<PropsWithChildren> = ({ children }) => {
   return (
-    <ul className="flex flex-col gap-3 md:flex-row md:gap-6 md:text-sm">
+    <ul className="flex flex-col gap-3 md:flex-row md:gap-6 md:text-sm xl:gap-11 xl:text-xl">
       {children}
     </ul>
   );
@@ -77,7 +75,12 @@ const Li: FunctionComponent<
 > = ({ children, childList }) => {
   const [isDropdown, setDropdown] = useState(false);
   return (
-    <li className="cursor-pointer rounded-2lg bg-blue-dark-700 md:relative md:bg-transparent">
+    <li
+      className={cn(
+        "cursor-pointer rounded-2lg bg-blue-dark-700 md:relative md:bg-transparent",
+        { "md:underline": isDropdown }
+      )}
+    >
       <div
         className="flex justify-between py-4.25 pl-5 pr-4 leading-none *:transition-all md:px-0"
         onClick={() => setDropdown(!isDropdown)}
@@ -86,14 +89,14 @@ const Li: FunctionComponent<
         <ArrowDown className={cn("md:hidden", { "rotate-180": isDropdown })} />
       </div>
       {isDropdown && (
-        <ul className="mb-2.5 md:absolute md:left-1/2 md:top-full md:mt-2 md:bg-blue-dark-700">
+        <ul className="mb-2.5 md:absolute md:left-1/2 md:top-full md:mt-2 md:-translate-x-1/2 md:rounded-2lg md:bg-blue-dark-700 md:px-2 md:py-1">
           {childList.map(({ Icon, title, href }, index) => (
             <Link href={href} key={index}>
-              <li className="flex items-center gap-4 px-5 py-2.5 md:p-0">
+              <li className="flex items-center gap-4 px-5 py-2.5 md:px-0 md:py-1">
                 <div className="rounded-2md bg-blue-dark-450 p-1.25">
                   <Icon />
                 </div>
-                <span>{title}</span>
+                <span className="md:whitespace-nowrap">{title}</span>
               </li>
             </Link>
           ))}
