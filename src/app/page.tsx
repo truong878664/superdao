@@ -1,10 +1,12 @@
-import GetStated from "@/components/sections/GetStarted";
+import Hero from "@/components/sections/Hero";
+import Project from "@/components/sections/Project";
 import { FunctionComponent } from "react";
 
 const Home: FunctionComponent = () => {
   return (
     <>
-      <GetStated />
+      <Hero />
+      <Project />
     </>
   );
 };

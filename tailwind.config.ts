@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import plugin from "tailwindcss/plugin";
 
 export default {
   content: [
@@ -10,6 +11,7 @@ export default {
     extend: {
       colors: {
         blue: {
+          440: "#5C9DFF",
           550: "#7795FF",
           dark: {
             950: "#0A1117",
@@ -72,10 +74,13 @@ export default {
       },
       fontSize: {
         "2sm": "0.9375rem",
+        "5.5xl": "3.25rem",
       },
       borderRadius: {
         "2md": "0.4375rem",
         "2lg": "0.625rem",
+        "2.5xl": "1.25rem",
+        circle: "100%",
       },
       spacing: {
         "1.25": "0.3125rem",
@@ -83,11 +88,36 @@ export default {
         "4.25": "1.0625rem",
         "7.5": "1.875rem",
         "8.5": "2.125rem",
+        "25": "6.25rem",
+      },
+      lineHeight: {
+        "7.5": "1.875rem",
+        "11": "2.75rem",
+        "15": "3.75rem",
+        "20.5": "5.125rem",
       },
       container: {
         center: true,
       },
+      boxShadow: {
+        "btn-md": "0 7px 36px",
+        "btn-lg": "0 8px 40px",
+      },
     },
   },
-  plugins: [],
+  plugins: [
+    plugin(({ addUtilities }) => {
+      addUtilities({
+        ".absolute-center": {
+          position: "absolute",
+          top: "50%",
+          left: "50%",
+          "--tw-translate-x": "-50%",
+          "--tw-translate-y": "-50%",
+          transform:
+            "translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))",
+        },
+      });
+    }),
+  ],
 } satisfies Config;
