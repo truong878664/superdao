@@ -8,7 +8,7 @@ import ArrowDown from "@/assets/icons/arrow-down.svg";
 import Link from "next/link";
 import { navList } from "@/app/constants";
 import SocialNetworkList from "../partials/SocialNetworkList";
-import InputTriggerPopup from "../shared/InputTriggerPopup";
+import InputTriggerPopup from "../ui/InputTriggerPopup";
 import { cn } from "@/lib/utils";
 
 interface HeaderProps {}
