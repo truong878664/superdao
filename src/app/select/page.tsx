@@ -11,13 +11,20 @@ const SelectPage: FunctionComponent<SelectPageProps> = () => {
 
   return (
     <div className="h-screen w-screen">
-      <Select defaultValue="test">
-        <Option value={"test"}>test</Option>
-        <Option value={"test2"}>test2</Option>
-        <Option value={"test3"}>test3</Option>
-        <Option value={"test4"}>test4</Option>
-        <Option value={"test5"}>test5</Option>
-        <Option value={"test6"}>test6</Option>
+      <Select
+        defaultValue="test"
+        // className="inline-block rounded-md border bg-gray-300 px-4 py-2 text-gray-800"
+      >
+        {Array.from({ length: 100 }).map((_, i) => (
+          <Option
+            key={i}
+            className="hover:bg-gray-100"
+            activeClassName="bg-blue-400"
+            value={"test" + i}
+          >
+            test {i}
+          </Option>
+        ))}
       </Select>
     </div>
   );
