@@ -6,6 +6,7 @@ import React, {
   Dispatch,
   FunctionComponent,
   HTMLAttributes,
+  ReactNode,
   RefObject,
   SetStateAction,
   useContext,
@@ -13,24 +14,22 @@ import React, {
   useRef,
   useState,
 } from "react";
-import {
-  useEventListener,
-  useOnClickOutside,
-  useScrollLock,
-} from "usehooks-ts";
+import { useEventListener, useOnClickOutside } from "usehooks-ts";
 
-type Value = string | number | undefined;
+type SelectValue = string | number | undefined;
 
-const ValueSelectContext = createContext<Value>(undefined);
-const DispatchSelectContext = createContext<Dispatch<SetStateAction<Value>>>(
-  () => {}
-);
+const SelectValueContext = createContext<SelectValue>(undefined);
+const DispatchSelectContext = createContext<
+  Dispatch<SetStateAction<SelectValue>>
+>(() => {});
 
 /**
  * Select
  */
 interface SelectProps extends HTMLAttributes<HTMLDivElement> {
-  defaultValue?: Value;
+  defaultValue?: SelectValue;
+  icon?: ReactNode;
+  offsetY?: number;
 }
 
 const Select: FunctionComponent<SelectProps> = ({
@@ -38,19 +37,19 @@ const Select: FunctionComponent<SelectProps> = ({
   defaultValue,
   onClick,
   style,
+  icon,
+  offsetY = 0,
   ...rest
 }) => {
+  const hasChildrenWrap = React.Children.count(children) === 1;
   const containerRef = useRef<HTMLDivElement>(null);
-  const lastKnowScrollPositionRef = useRef(0);
-  const lastKnowTopPositionRef = useRef(0);
-  const detailYRef = useRef(0);
 
   const [position, setPosition] = useState<{ left: number; top: number }>({
     left: 0,
     top: 0,
   });
 
-  const [value, setValue] = useState<Value>(defaultValue);
+  const [value, setValue] = useState<SelectValue>(defaultValue);
   const [open, setOpen] = useState<boolean>(false);
 
   useOnClickOutside(containerRef as RefObject<HTMLElement>, () =>
@@ -58,50 +57,58 @@ const Select: FunctionComponent<SelectProps> = ({
   );
 
   useEventListener("scroll", () => {
-    window.requestAnimationFrame((e) => {
-      detailYRef.current = window.scrollY - lastKnowScrollPositionRef.current;
-      setPosition({
-        ...position,
-        top: lastKnowTopPositionRef.current - detailYRef.current,
-      });
-      lastKnowScrollPositionRef.current = window.screenY;
-    });
+    if (open) setOpen(false);
   });
+
+  useEffect(() => {
+    if (open) setOpen(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [value]);
+
   return (
-    <ValueSelectContext.Provider value={value}>
+    <SelectValueContext value={value}>
       <DispatchSelectContext value={setValue}>
         <>
           <div
             onClick={(e) => {
               const rect = e.currentTarget.getBoundingClientRect();
-              setPosition({ left: rect.left, top: rect.top + rect.height });
-              lastKnowTopPositionRef.current = rect.top + rect.height;
+              const left = rect.left;
+              const top = rect.top + rect.height + offsetY;
+
+              setPosition({ left, top });
               setOpen(!open);
               onClick?.(e);
             }}
-            style={{ cursor: "pointer", ...style }}
+            style={{
+              cursor: "pointer",
+              display: "inline-flex",
+              gap: 4,
+              alignItems: "center",
+              ...style,
+            }}
             {...rest}
           >
-            {value}
+            <span>{value}</span>
+            {icon}
           </div>
           {open && (
             <Portal
               ref={containerRef}
+              asChild={hasChildrenWrap}
               style={{
                 position: "fixed",
                 top: position.top,
                 left: position.left,
-                maxHeight: 400,
-                overflowY: "auto",
+                height: 400,
+                overflow: hasChildrenWrap ? undefined : "auto",
               }}
-              className="bg-white text-black"
             >
               {children}
             </Portal>
           )}
         </>
       </DispatchSelectContext>
-    </ValueSelectContext.Provider>
+    </SelectValueContext>
   );
 };
 
@@ -109,7 +116,7 @@ const Select: FunctionComponent<SelectProps> = ({
  * Option
  */
 interface OptionProps extends HTMLAttributes<HTMLDivElement> {
-  value: Value;
+  value: SelectValue;
   activeClassName?: string;
 }
 
@@ -121,8 +128,9 @@ const Option: React.FunctionComponent<OptionProps> = ({
   className,
   ...rest
 }) => {
-  const currentValue = useContext(ValueSelectContext);
+  const currentValue = useContext(SelectValueContext);
   const dispatchValue = useContext(DispatchSelectContext);
+
   return (
     <div
       data-active={currentValue === value}

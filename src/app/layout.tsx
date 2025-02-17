@@ -4,8 +4,6 @@ import localFont from "next/font/local";
 
 import "./globals.css";
 
-import Header from "../components/layout/Header";
-
 import { cn } from "@/lib/utils";
 
 const montserrat = Montserrat({
@@ -38,14 +36,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body
-        className={cn(
-          montserrat.className,
-          loosWideBold.variable,
-          "bg-blue-dark-950 font-medium text-white"
-        )}
-      >
-        <Header />
+      <body className={cn(montserrat.className, loosWideBold.variable)}>
         {children}
       </body>
     </html>
