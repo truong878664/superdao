@@ -32,6 +32,7 @@ const Header: FunctionComponent<HeaderProps> = () => {
                 type="radio"
                 id="hide-dropdown"
                 name="dropdown"
+                defaultChecked
                 className="sr-only"
               />
               <NavHeader.Ul>
