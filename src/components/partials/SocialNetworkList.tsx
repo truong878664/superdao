@@ -3,12 +3,12 @@ import { FunctionComponent } from "react";
 
 const SocialNetworkList: FunctionComponent = () => {
   return (
-    <ul className="flex justify-between md:hidden">
+    <ul className="sticky bottom-0 flex justify-between md:hidden">
       {socialNetworkList.map(({ Icon, ...social }, index) => (
         <a key={index} href={social.url}>
           <li
             style={{ "--color": social.color } as any}
-            className="bg-var-color rounded-full bg-opacity-15 p-3.5"
+            className="bg-var-color bg-opacity-15 rounded-full p-3.5"
             data-background={social.color}
           >
             <Icon />

@@ -48,19 +48,43 @@ const navList = [
   },
   {
     title: "Use cases",
-    children: [],
+    children: [
+      {
+        title: "Demo",
+        href: "#",
+        Icon: DemoIcon,
+      },
+    ],
   },
   {
     title: "Learn",
-    children: [],
+    children: [
+      {
+        title: "Demo",
+        href: "#",
+        Icon: DemoIcon,
+      },
+    ],
   },
   {
     title: "About",
-    children: [],
+    children: [
+      {
+        title: "Demo",
+        href: "#",
+        Icon: DemoIcon,
+      },
+    ],
   },
   {
     title: "Jobs",
-    children: [],
+    children: [
+      {
+        title: "Demo",
+        href: "#",
+        Icon: DemoIcon,
+      },
+    ],
   },
 ];
 

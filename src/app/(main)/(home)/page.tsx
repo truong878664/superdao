@@ -6,7 +6,7 @@ const Home: FunctionComponent = () => {
   return (
     <>
       <Hero />
-      <Project />
+      {/* <Project /> */}
     </>
   );
 };
